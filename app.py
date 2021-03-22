@@ -70,7 +70,7 @@ def gradient():
         
     content = scale_data(request.json)
     data_array = convert_to_array(content)
-    prediction = int(adaboost_model.predict(data_array))
+    prediction = int(gradient_model.predict(data_array))
     
     return jsonify(prediction)
 
