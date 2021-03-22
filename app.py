@@ -24,9 +24,8 @@ feature = [
 ]
 
 # Load saved ML models
-tf_model = load_model('neural')
-with open('adaboost.pkl', 'rb') as f:
-    adaboost_model = pickle.load(f)
+with open('gradient.pkl', 'rb') as f:
+    gradient_model = pickle.load(f)
     
 
 # Load scaler info    
@@ -66,8 +65,8 @@ def home():
     return 'App is Healthy'
 
 
-@app.route('/adaboost', methods=['POST'])
-def adaboost():       
+@app.route('/gradient', methods=['POST'])
+def gradient():       
         
     content = scale_data(request.json)
     data_array = convert_to_array(content)
@@ -76,12 +75,7 @@ def adaboost():
     return jsonify(prediction)
 
 
-@app.route('/neural', methods=['POST'])
-def neural():       
-        
-    content = scale_data(request.json)
-    data_array = convert_to_array(content)
-    prediction = int((tf_model.predict(data_array) > 0.5).astype(int))
+
     
     return jsonify(prediction)
 
